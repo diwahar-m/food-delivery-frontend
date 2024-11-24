@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
@@ -26,12 +26,12 @@ const PlaceOrder = () => {
   };
 
   const placeOrder = async (event) => {
-    event.preventDefaul();
+    event.preventDefault();
     let orderItems = [];
     food_list.map((item) => {
       if (cartItems[item._id] > 0) {
         let itemInfo = item;
-        itemInfo["quatity"] = cartItems[item._id];
+        itemInfo["quantity"] = cartItems[item._id];
         orderItems.push(itemInfo);
       }
     });
