@@ -12,8 +12,9 @@ const MyOrders = () => {
     const response = await axios.post(
       url + `/api/order/userorders`,
       {},
-      { header: token }
+      { headers: { token } }
     );
+    console.log(response);
     setData(response.data.data);
   };
 
@@ -21,13 +22,13 @@ const MyOrders = () => {
     if (token) {
       fetchOrders();
     }
-  });
+  }, []);
 
   return (
     <div className="my-orders">
       <h2>My Orders</h2>
       <div className="container">
-        {data.map((order, index) => {
+        {data?.map((order, index) => {
           return (
             <div key={index} className="my-orders-order">
               <img src={assets.parcel_icon} alt="" />
