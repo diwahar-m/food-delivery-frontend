@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, food_list, cartItems, url } =
@@ -47,7 +49,8 @@ const PlaceOrder = () => {
       const { session_url } = response.data;
       window.location.replace(session_url);
     } else {
-      alert("Error");
+      console.log(response.data.message);
+      toast.error(response.data.message);
     }
   };
 
@@ -55,6 +58,7 @@ const PlaceOrder = () => {
 
   return (
     <form onSubmit={placeOrder} className="place-order">
+      <ToastContainer position="bottom-center" />
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
         <div className="multi-fields">
